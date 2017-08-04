@@ -1,0 +1,31 @@
+Project Breakdown:
+Summary:
+Run ButtonBox.java. Select your mood and choose a VALID artist that is one of your favorites (make sure the name is spelled right!). 
+Now you must wait. In about 30 seconds, you will get a playlist that lists songs related to your mood AND your favorite artist!!
+Please be patient and wait long enough; the parsing takes a little bit of time to load from the internet :) We have used document search 
+in the design on this project. 
+
+Main Method: ButtonBox: Gabby
+This main method uses Java Swing to create a GUI interface for our project. The method calls each of the helper methods listed below in 
+order to complete the algorithm. It first takes in the users mood and favorite artist. Then, from that artist it finds a list of similar 
+artists that have the user’s mood (or one related). From the list, we iterated through each artist's page and found their top listed song. 
+
+getArtistsMoods: Jordan
+This method took in the URL for an artist in the form of a String. I then used JSoup to parse through the page for the element in the 
+HTML code that had each mood as a child element. I iterated through each of these children and added its text (aka the name of that mood 
+represented as a String) to a set. I then returned the complete set of moods.
+
+getSong: Jordan
+This function took in the URL for an artist in the form of a String. I added “/songs” to the end of the artist URL and then parsed this 
+page using JSoup, first finding the name of the artist and storing it as a string variable. On this page, all “highlighted songs” by the 
+artist are found in the HTML code with a tag “div” and class = “title”. I made an Elements object that found all the elements that contained 
+the proper tag and class. I then found the number of “highlighted songs” by getting the size of the Elements object. I randomly picked a number, 
+n, in the range of the number of songs. I then found the nth Element in the Elements object. This was the song that would be selected for the 
+particular artist. I then parsed through the element to find the song title. I returned a string in the form: “Song title” - Name of Artist
+
+getRelatedArtists method: Stella
+This method takes in a string (the artist name) and returns a list of related artists’ page URLS on allmusic.com (stored in a set) by parsing 
+through the allmusic.com website data. Because each artist has a unique URL, we have to go to the search page for the artist and then get the 
+URL for the artist’s page from the search results. We then visit this page, specifically the “Related” artists section, using URLGetter and then
+parse through the contents. When we get to the part of the page contents that contains the related artists, we find the URLs of all these artists 
+and then add them to the set to be returned.
